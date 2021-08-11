@@ -9,7 +9,7 @@ apiRouter.get('', (req, res) => {
 
 //===============User api===================
 apiRouter.post('/product', product.addProduct);
-// apiRouter.get('/product', product.getProduct);
+apiRouter.get('/product', product.getProduct);
 
 
 
