@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(express.urlencoded());
 
 
-const port = 5500;
+const port = 8000;
 var apiRouter = require("./routes/api");
 
 app.use(apiRouter)
