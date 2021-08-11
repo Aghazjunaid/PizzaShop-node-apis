@@ -24,7 +24,7 @@ module.exports = () => {
         async function getProduct(req,res){
             var return_response = { "status": null, "message": null, "data": {} } 
             try {
-                const doc = await Product.find({user:req.user.id});
+                const doc = await Product.find({});
                 return_response.status = 200;
                 return_response.message = "Success";
                 return_response.data = doc;
@@ -34,6 +34,22 @@ module.exports = () => {
             }
             res.json(return_response);
         }
+
+        //====================Get Password By Id==================================================
+        async function getProductById(req,res){
+            var return_response = { "status": null, "message": null, "data": {} } 
+            try {
+                const doc = await Product.find({_id:req.params.id});
+                return_response.status = 200;
+                return_response.message = "Success";
+                return_response.data = doc;
+            } catch (error) {
+                return_response.status = 400;
+                return_response.message = String(error);
+            }
+            res.json(return_response);
+        }
+        
     
 
 
@@ -41,7 +57,8 @@ module.exports = () => {
 
     return {
         addProduct,
-        getProduct
+        getProduct,
+        getProductById
     }
 
 }
