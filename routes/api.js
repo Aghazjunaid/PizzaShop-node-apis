@@ -14,8 +14,10 @@ apiRouter.get('/product', product.getProduct);
 apiRouter.get('/product/:id', product.getProductById);
 
 //==============cart api=======================
-apiRouter.post('/cart', cart.postCart);
-
+apiRouter.post('/cart/:productId', cart.postCart);
+apiRouter.get('/cart', cart.getCart);
+apiRouter.delete('/cart/:id', cart.deleteCart);
+apiRouter.get('/find', cart.totalCartPrice);
 
 
 module.exports = apiRouter;
