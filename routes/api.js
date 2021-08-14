@@ -15,6 +15,7 @@ apiRouter.get('/product/:id', product.getProductById);
 
 //==============cart api=======================
 apiRouter.post('/cart/:productId', cart.postCart);
+apiRouter.post('/decreaseCartQuantity/:productId', cart.decreaseCartQuantity);
 apiRouter.get('/cart', cart.getCart);
 apiRouter.delete('/cart/:id', cart.deleteCart);
 apiRouter.get('/find', cart.totalCartPrice);

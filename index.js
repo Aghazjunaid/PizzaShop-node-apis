@@ -14,8 +14,8 @@ var apiRouter = require("./routes/api");
 
 app.use(cors());
 app.use(apiRouter)
-
-
+// console.log(Math.sqrt(7676467767676576576576575675677))
+// console.log(2+2)
 // app.use(express.urlencoded({ extended: true }));
 // app.use(bodyParser.urlencoded({ extended: false }))
 // app.use(bodyParser.json())

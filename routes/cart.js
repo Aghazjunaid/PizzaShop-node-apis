@@ -11,18 +11,39 @@ module.exports = () => {
         let opt = req.body;
         let cartData = await Cart.findOne({product:req.params.productId})
         if(cartData && cartData.product == req.params.productId){
-            cartData.quantity += opt.quantity
+            cartData.quantity += 1;
             await cartData.save()
             return_response.data = cartData;
 
         }else {
             opt.product = req.params.productId
+            opt.quantity = 1;
             const cart = new Cart(opt);
             const doc = await cart.save();  
             return_response.data = doc;  
         }
         return_response.status = 200;
         return_response.message = "Product added successfully";
+    } catch (error) {
+        return_response.status = 400;
+        return_response.message = String(error);
+    }
+    res.json(return_response);
+}
+
+//=====================decrease cart value==============================================
+async function decreaseCartQuantity(req,res){
+    var return_response = { "status": null, "message": null, "data": {} } 
+    try {
+        let cartData = await Cart.findOne({product:req.params.productId})
+        if(cartData && cartData.product == req.params.productId){
+            cartData.quantity += -1;
+            await cartData.save()
+            return_response.data = cartData;
+
+        }
+        return_response.status = 200;
+        return_response.message = "Quantity Decreased successfully";
     } catch (error) {
         return_response.status = 400;
         return_response.message = String(error);
@@ -38,7 +59,7 @@ module.exports = () => {
         "data": null
     }
     try{
-        Cart.find({}).exec(function(error,doc){
+        Cart.find({}).populate('product').exec(function(error,doc){
             if(error){
                 return_response["status"] = 400;
                 return_response["message"] = String(error);
@@ -111,6 +132,7 @@ module.exports = () => {
 
     return {
         postCart,
+        decreaseCartQuantity,
         getCart,
         deleteCart,
         totalCartPrice
